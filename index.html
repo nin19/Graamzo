@@ -438,7 +438,7 @@
             width: 420px;
             height: 100%;
             background: white;
-            z-index: 2000;
+            z-index: 6000;
             box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
             transition: right .35s cubic-bezier(.4, 0, .2, 1);
             display: flex;
@@ -462,7 +462,8 @@
 
         .cart-header h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.8rem;
+            color: white;
         }
 
         #close-cart {
@@ -645,7 +646,7 @@
         #checkout-modal {
             position: fixed;
             inset: 0;
-            z-index: 3000;
+            z-index: 9000;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -747,9 +748,24 @@
         .order-summary-mini .item-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: .85rem;
             padding: 4px 0;
             border-bottom: 1px solid rgba(126, 194, 71, .2);
+        }
+
+        .order-summary-mini .item-row span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkout-img {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+            border-radius: 4px;
+            flex-shrink: 0;
         }
 
         .order-summary-mini .total-row {
@@ -1906,7 +1922,7 @@
                 const variant = getSelectedVariant(p);
                 const subtotal = variant.price * cart[id];
                 total += subtotal;
-                html += `<div class="item-row"><span>${p.emoji} ${p.name} (${variant.quantity}) × ${cart[id]}</span><span>₹${subtotal}</span></div>`;
+                html += `<div class="item-row"><span><img class="checkout-img" src="${p.image}" alt="${p.name}"> ${p.name} (${variant.quantity}) × ${cart[id]}</span><span>₹${subtotal}</span></div>`;
             });
             html += `<div class="total-row"><span>Total Amount</span><span>₹${total}</span></div>`;
             document.getElementById('order-summary-mini').innerHTML = html;
